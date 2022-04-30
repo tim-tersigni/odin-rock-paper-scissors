@@ -6,10 +6,14 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     const options = ["Rock", "Paper", "Scissors"]
+    playerSelection = playerSelection.slice(0,1).toUpperCase() 
+                      + playerSelection.slice(1).toLowerCase()
+    computerSelection = computerSelection.slice(0,1).toUpperCase()
+                        + computerSelection.slice(1).toLowerCase()
 
     // Assign values based on list position
-    let playerValue
-    let computerValue
+    let playerValue = null
+    let computerValue = null
     let val = 0
     for(let o of options) {
         if(playerSelection == o) {
@@ -20,6 +24,11 @@ function playRound(playerSelection, computerSelection) {
             computerValue = val
         }
         val += 1
+    }
+
+    // Check for invalid input
+    if (playerValue == null) {
+        return `${playerSelection} is not an option!`
     }
 
     // Determine result based off of list position values
@@ -37,5 +46,12 @@ function playRound(playerSelection, computerSelection) {
     }
     else {
         return `You Lose! ${computerSelection} beats ${playerSelection}.`
+    }
+}
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        playerSelection = prompt("Select Rock, Paper, or Scissors")
+        playRound(playerSelection, computerPlay())
     }
 }
