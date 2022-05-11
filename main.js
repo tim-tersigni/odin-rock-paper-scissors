@@ -4,12 +4,14 @@ function computerPlay() {
     return options[rand]
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    // Get computer's choice
+    computerSelection = computerPlay()
+
+    // Parse user input
     const options = ["Rock", "Paper", "Scissors"]
     playerSelection = playerSelection.slice(0,1).toUpperCase() 
                       + playerSelection.slice(1).toLowerCase()
-    computerSelection = computerSelection.slice(0,1).toUpperCase()
-                        + computerSelection.slice(1).toLowerCase()
 
     // Assign values based on list position
     let playerValue = null
@@ -49,12 +51,11 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Select Rock, Paper, or Scissors")
-        outcome = playRound(playerSelection, computerPlay())
-        alert(outcome)
-    }
-}
-
-game()
+// for each button in index, add click listener which calls playRound using 
+// the button's choice (Rock, Paper, or Scissors)
+document.querySelectorAll("button").forEach(b => {
+    b.addEventListener("click", () => {
+        result = playRound(b.getAttribute("data-choice"));
+        alert(result);
+    });
+});
